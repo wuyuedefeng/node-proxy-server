@@ -23,6 +23,8 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 proxy.on('proxyRes', function (proxyRes, req, res) {
   // res.setHeader('content-type', 'application/json;charset=utf-8');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
   proxyRes.pipe(res)
 });
 
