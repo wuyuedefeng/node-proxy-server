@@ -5,8 +5,8 @@ module.exports = shipit => {
 
   shipit.initConfig({
     default: {
-      deployTo: '/mnt/www/app-name',
-      repositoryUrl: 'https://github.com/user/super-project.git',
+      deployTo: '/mnt/www/node-proxy-server',
+      repositoryUrl: 'https://github.com/wuyuedefeng/node-proxy-server',
       keepReleases: 8,
       ignores: ['.git', 'node_modules', 'logs'],
       shared: {

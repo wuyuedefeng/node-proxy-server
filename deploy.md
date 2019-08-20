@@ -8,6 +8,6 @@ $ npm install --save-dev shipit-shared
 ```
 
 ```
-$ [npx] shipit staging deploy
-$ [npx] shipit staging pm2:start
+$ [npx] shipit production deploy
+$ [npx] shipit production pm2:start
 ```
