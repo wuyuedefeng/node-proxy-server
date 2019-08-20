@@ -38,16 +38,16 @@ var server = http.createServer(function(req, res) {
 
   let pathMatch = urlObj.path.match(/^\/http(s)?:\/\/(?:\w+\.)+\w+/i)
 
+  let origin = `${req.headers['x-proxy-target'] || cookies.get('x-proxy-target') || queryObj['x-proxy-target'] || ''}`
   let target = ''
   if (pathMatch) {
     target = urlObj.path.replace(/^\//i, '')
-  } else {
-    let origin = `${req.headers['x-proxy-target'] || cookies.get('x-proxy-target') || queryObj['x-proxy-target'] || ''}`
+  } else if (origin) {
     target = `${origin}${urlObj.path}`
   }
 
   if (!target) {
-    res.write('please set header, cookie or query field [x-proxy-target] for your target host')
+    res.write('please set header, cookie or query field [x-proxy-target] for your target origin, or make full link as path')
     res.end()
   } else {
     // You can define here your custom logic to handle the request
