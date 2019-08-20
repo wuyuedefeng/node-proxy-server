@@ -36,12 +36,12 @@ var server = http.createServer(function(req, res) {
   let queryObj = qs.parse(urlObj.query)
   let cookies = new Cookies(req, res)
 
-  let pathMatch = urlObj.path.match(/^\/http(s)?:\/\/(?:\w+\.)+\w+/i)
+  let pathMatch = urlObj.path.match(/^\/http(s)?:(\/)+(\w+\.)+\w+/i)
 
   let origin = `${req.headers['x-proxy-target'] || cookies.get('x-proxy-target') || queryObj['x-proxy-target'] || ''}`
   let target = ''
   if (pathMatch) {
-    target = urlObj.path.replace(/^\//i, '')
+    target = urlObj.path.replace(/^\//i, '').replace(/http:(\/)+/, 'http://').replace(/https:(\/)+/, 'https://')
   } else if (origin) {
     target = `${origin}${urlObj.path}`
   }
