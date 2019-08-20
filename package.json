@@ -1,0 +1,19 @@
+{
+  "name": "proxy-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cookies": "^0.7.3",
+    "http-proxy": "^1.17.0"
+  },
+  "devDependencies": {
+    "shipit-deploy": "^5.0.0",
+    "shipit-shared": "^4.4.2"
+  }
+}
