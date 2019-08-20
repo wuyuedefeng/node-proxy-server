@@ -54,6 +54,7 @@ var server = http.createServer(function(req, res) {
     // and then proxy the request.
     proxy.web(req, res, {
       target,
+      ignorePath: true,
       changeOrigin: true,
       autoRewrite: true,
       selfHandleResponse : true
