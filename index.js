@@ -18,14 +18,17 @@ const proxy = httpProxy.createProxyServer({});
 // is made to the target.
 //
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
-  proxyReq.setHeader('X-Special-Proxy-Header', 'foobar');
+  // proxyReq.setHeader('X-Special-Proxy-Header', 'foobar');
 });
 
 proxy.on('proxyRes', function (proxyRes, req, res) {
   // res.setHeader('content-type', 'application/json;charset=utf-8');
+  Object.keys(proxyRes.headers).forEach(key => {
+    res.setHeader(key, proxyRes.headers[key]);
+  })
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
-  // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Proxy-Target, Content-Type, Authorization, Auth, Token, Access-Token, Access_Token, AccessToken, Code');
   proxyRes.pipe(res)
 });
 
@@ -57,6 +60,7 @@ var server = http.createServer(function(req, res) {
     // and then proxy the request.
     proxy.web(req, res, {
       target,
+      xfwd: true,
       ignorePath: true,
       changeOrigin: true,
       autoRewrite: true,
